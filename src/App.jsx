@@ -3,18 +3,28 @@ import GameBoard from "./components/GmaeBoard";
 import Log from "./components/Log";
 import Player from "./components/Player";
 
+// helper function
+function deriveActivePlayer(gameTurns) {
+  let currentPlayer = "X";
+
+  if (gameTurns.length > 0 && gameTurns[0].player === "X") {
+    currentPlayer = "O";
+  }
+
+  return currentPlayer;
+}
+
 function App() {
   const [gameTurns, setGameTurns] = useState([]);
-  const [activePlayer, setActivePlayer] = useState("X");
+  // const [activePlayer, setActivePlayer] = useState("X"); // gameTurns로 구분할 수 있음
+
+  const activePlayer = deriveActivePlayer(gameTurns);
 
   function handleSelectSquare(rowIndex, colIndex) {
-    setActivePlayer((curActivePlay) => (curActivePlay === "X" ? "O" : "X"));
+    // setActivePlayer((curActivePlay) => (curActivePlay === "X" ? "O" : "X"));
     setGameTurns((prevTurns) => {
-      let currentPlayer = "X";
+      const currentPlayer = deriveActivePlayer(prevTurns);
 
-      if (prevTurns.length > 0 && prevTurns[0].player === "X") {
-        currentPlayer = "O";
-      }
       // updatedTurns 내 { } 파트는 하나의 객체를 만드는 것
       const updatedTurns = [
         { square: { row: rowIndex, col: colIndex }, player: currentPlayer },
