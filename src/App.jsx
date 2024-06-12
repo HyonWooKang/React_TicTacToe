@@ -1,3 +1,4 @@
+// import React from "react";
 import { useState } from "react";
 import GameBoard from "./components/GmaeBoard";
 import Log from "./components/Log";
@@ -34,6 +35,13 @@ function App() {
       return updatedTurns;
     });
   }
+
+  // // test
+  // React.createElement(
+  //   "div",
+  //   { id: "content" },
+  //   React.createElement("p", null, "Hellow World")
+  // );
 
   return (
     <main>
