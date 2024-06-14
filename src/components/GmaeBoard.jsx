@@ -1,21 +1,6 @@
-// state가 아니기 때문에 함수 밖ㅇ에 선언
-const initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
-export default function GameBoard({ onSelectSquare, turns }) {
+export default function GameBoard({ onSelectSquare, board }) {
   // 해당 파트는 파생된 파트임
   // 리액트는 제어하는 상태의 수는 최소화하고 각 상태에서 많은 정보와 많은 값을 파생시키는게 좋다.
-  let gameBoard = initialGameBoard;
-
-  for (const turn of turns) {
-    const { square, player } = turn;
-    const { row, col } = square;
-
-    gameBoard[row][col] = player;
-  }
 
   // const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
@@ -36,7 +21,7 @@ export default function GameBoard({ onSelectSquare, turns }) {
 
   return (
     <ol id="game-board">
-      {gameBoard.map((row, rowIndex) => (
+      {board.map((row, rowIndex) => (
         <li key={rowIndex}>
           <ol>
             {row.map((playerSymbol, colIndex) => (
