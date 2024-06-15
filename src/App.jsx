@@ -48,11 +48,15 @@ function App() {
     const thirdSquareSymbol =
       gameBoard[combination[2].row][combination[2].column];
 
-    console.log("firstSquareSymbol", firstSquareSymbol);
-    console.log("secondSquareSybol", secondSquareSybol);
-    console.log("thirdSquareSymbol", thirdSquareSymbol);
+    // console.log("firstSquareSymbol", firstSquareSymbol);
+    // console.log("secondSquareSybol", secondSquareSybol);
+    // console.log("thirdSquareSymbol", thirdSquareSymbol);
 
-    if (firstSquareSymbol) {
+    if (
+      firstSquareSymbol &&
+      firstSquareSymbol === secondSquareSybol &&
+      firstSquareSymbol === thirdSquareSymbol
+    ) {
       winner = firstSquareSymbol;
     }
   }
@@ -95,7 +99,7 @@ function App() {
           />
         </ol>
         {winner && <p>You won, {winner}</p>}
-        <GameBoard onSelectSquare={handleSelectSquare} turns={gameBoard} />
+        <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
       <Log turns={gameTurns} />
     </main>
