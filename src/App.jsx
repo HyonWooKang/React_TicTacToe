@@ -6,7 +6,7 @@ import Log from "./components/Log";
 import Player from "./components/Player";
 import { WINNING_COMBINATIONS } from "./winning-combinations";
 
-// state가 아니기 때문에 함수 밖ㅇ에 선언
+// state가 아니기 때문에 함수 밖에 선언
 const initialGameBoard = [
   [null, null, null],
   [null, null, null],
@@ -30,7 +30,8 @@ function App() {
 
   const activePlayer = deriveActivePlayer(gameTurns);
 
-  let gameBoard = initialGameBoard;
+  // 깊은 복사로 원본의 메모리를 수정하는 것이 아니고 새로 하나 저장함
+  let gameBoard = [...initialGameBoard.map((array) => [...array])];
 
   for (const turn of gameTurns) {
     const { square, player } = turn;
@@ -79,6 +80,10 @@ function App() {
     });
   }
 
+  function handleRestart() {
+    setGameTurns([]);
+  }
+
   // // test
   // React.createElement(
   //   "div",
@@ -101,7 +106,9 @@ function App() {
             isActive={activePlayer === "O"}
           />
         </ol>
-        {(winner || hasDraw) && <GameOver winner={winner} />}
+        {(winner || hasDraw) && (
+          <GameOver winner={winner} onRestart={handleRestart} />
+        )}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
       <Log turns={gameTurns} />
