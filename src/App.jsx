@@ -25,6 +25,10 @@ function deriveActivePlayer(gameTurns) {
 }
 
 function App() {
+  const [players, setPlayers] = useState({
+    X: "Player 1",
+    O: "Player2",
+  });
   const [gameTurns, setGameTurns] = useState([]);
   // const [activePlayer, setActivePlayer] = useState("X"); // gameTurns로 구분할 수 있음
 
@@ -82,6 +86,15 @@ function App() {
 
   function handleRestart() {
     setGameTurns([]);
+  }
+
+  function handlePlayNameChange(symbol, newName) {
+    setPlayers((prevPlayers) => {
+      return {
+        ...prevPlayers,
+        [symbol]: newName,
+      };
+    });
   }
 
   // // test
